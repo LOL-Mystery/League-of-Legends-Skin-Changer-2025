@@ -1,0 +1,21 @@
+name: Update File
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update Date and Time
+        run: |
+          echo $(date '+%Y-%m-%d %H:%M:%S') > Update
+          
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: "Update file"
