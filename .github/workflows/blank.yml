@@ -11,11 +11,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Update Date and Time
+      - name: Update File
         run: |
           echo $(date '+%Y-%m-%d %H:%M:%S') > Update
-          
+
       - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          message: "Update file"
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add Update
+          git commit -m "Update file"
+          git push
